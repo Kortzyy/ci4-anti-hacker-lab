@@ -1,222 +1,69 @@
-# README.md
+# CodeIgniter 4 Application Starter
 
-````md
-# 🛡️ CI4 Anti-Hacker Lab
+## What is CodeIgniter?
 
-A modern cybersecurity demonstration project built using PHP and CodeIgniter 4 that showcases protection against:
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](https://codeigniter.com).
 
-- CSRF (Cross-Site Request Forgery)
-- XSS (Cross-Site Scripting)
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
-This project includes a modern glassmorphism UI, hacker-themed attack simulation, and secure form handling using CodeIgniter 4 security features.
+More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
 
----
+You can read the [user guide](https://codeigniter.com/user_guide/)
+corresponding to the latest version of the framework.
 
-# 📌 Features
+## Installation & updates
 
-✅ CSRF Protection using `csrf_field()`  
-✅ XSS Protection using `esc()`  
-✅ Modern Cybersecurity UI Design  
-✅ Hacker Attack Visual Simulation  
-✅ Secure Form Submission  
-✅ Responsive Layout  
-✅ Glassmorphism Design  
-✅ Animated Security Alert Effects
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
 
----
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
 
-# 🧪 Technologies Used
+## Setup
 
-- PHP
-- CodeIgniter 4
-- HTML5
-- CSS3
-- VS Code
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
 
----
+## Important Change with index.php
 
-# 📂 Project Structure
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
 
-```bash
-app/
-├── Controllers/
-│   └── FormController.php
-│
-├── Views/
-│   ├── form_view.php
-│   └── result_view.php
-│
-├── Config/
-│   └── Filters.php
-│
-└── Config/
-    └── Routes.php
-````
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
 
----
+**Please** read the user guide for a better explanation of how CI4 works!
 
-# ⚙️ Installation
+## Repository Management
 
-## 1. Clone Repository
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
 
-```bash
-git clone https://github.com/yourusername/ci4-anti-hacker-lab.git
-```
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
 
----
+## Server Requirements
 
-## 2. Open Project
+PHP version 8.2 or higher is required, with the following extensions installed:
 
-Move the project folder inside:
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
 
-```bash
-htdocs/
-```
+> [!WARNING]
+> - The end of life date for PHP 7.4 was November 28, 2022.
+> - The end of life date for PHP 8.0 was November 26, 2023.
+> - The end of life date for PHP 8.1 was December 31, 2025.
+> - If you are still using below PHP 8.2, you should upgrade immediately.
+> - The end of life date for PHP 8.2 will be December 31, 2026.
 
-Example:
+Additionally, make sure that the following extensions are enabled in your PHP:
 
-```bash
-C:\xampp\htdocs\ci4-anti-hacker-lab
-```
-
----
-
-## 3. Start XAMPP
-
-Start:
-
-* Apache
-
----
-
-## 4. Install Dependencies
-
-Open terminal inside project folder:
-
-```bash
-composer install
-```
-
----
-
-## 5. Run CodeIgniter 4
-
-```bash
-php spark serve
-```
-
----
-
-## 6. Open Browser
-
-```bash
-http://localhost:8080/form
-```
-
----
-
-# 🔒 Security Features
-
-## CSRF Protection
-
-Enabled globally inside:
-
-```php
-app/Config/Filters.php
-```
-
-```php
-'before' => [
-    'csrf'
-]
-```
-
-Forms use:
-
-```php
-<?= csrf_field() ?>
-```
-
-If the CSRF token is missing, the request automatically fails with:
-
-```text
-403 Forbidden
-```
-
----
-
-## XSS Protection
-
-User input is escaped using:
-
-```php
-<?= esc($user_input) ?>
-```
-
-This converts dangerous characters such as:
-
-```html
-<script>
-```
-
-into:
-
-```html
-&lt;script&gt;
-```
-
-preventing the browser from executing malicious scripts.
-
----
-
-# 💀 XSS Attack Demo
-
-Try entering:
-
-```html
-<script>document.title='Hacked'</script>
-```
-
-### Result:
-
-* The script DOES NOT execute
-* Browser title remains safe
-* The UI switches into a hacker alert mode
-* Suspicious script is detected and neutralized
-
----
-
-# ❓ Discussion Questions
-
-## Q1. Can CSRF attacks happen with GET requests?
-
-Yes, CSRF attacks can happen with GET requests if the request performs sensitive actions like deleting or updating data. Although GET is mainly intended for retrieving information, insecure applications may still use it for critical operations that attackers can exploit.
-
----
-
-## Q2. What if an attacker guesses the CSRF token?
-
-If an attacker successfully guesses the CSRF token, they may bypass the CSRF protection and perform unauthorized actions on behalf of the user. However, modern frameworks like CodeIgniter 4 generate long and random tokens that are extremely difficult to predict.
-
----
-
-## Q3. Why isn't validating input enough to stop XSS?
-
-Validating input alone is not enough because malicious scripts can still pass through if they match the allowed format. Output escaping using `esc()` is still necessary because it prevents the browser from interpreting harmful code as executable JavaScript or HTML.
-
----
-
-# 👨‍💻 Author
-
-Developed by Kurt Russel B. Zarate
-BSIT Student
-Advance Web Development
-
----
-
-# 📜 License
-
-This project is for educational purposes only.
-
-```
-```
+- json (enabled by default - don't turn it off)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
