@@ -31,7 +31,6 @@ This project includes a modern glassmorphism UI, hacker-themed attack simulation
 - CodeIgniter 4
 - HTML5
 - CSS3
-- XAMPP
 - VS Code
 
 ---
