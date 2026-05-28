@@ -221,9 +221,9 @@ Validating input alone is not enough because malicious scripts can still pass th
 
 # 👨‍💻 Author
 
-Developed by Kurt
+Developed by Kurt Russel B. Zarate
 BSIT Student
-Cybersecurity & Web Security Laboratory Activity
+Advance Web Development
 
 ---
 
