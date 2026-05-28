@@ -186,18 +186,6 @@ Try entering:
 
 ---
 
-# 📸 Screenshots
-
-## Normal Mode
-
-(Add screenshot here)
-
-## Security Alert Mode
-
-(Add screenshot here)
-
----
-
 # ❓ Discussion Questions
 
 ## Q1. Can CSRF attacks happen with GET requests?
